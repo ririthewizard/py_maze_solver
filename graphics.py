@@ -38,4 +38,5 @@ class Line:
         self.point_b = point_b
     
     def draw(canvas: Canvas, fill_color):
-        pass
+        canvas = Canvas(root)
+        
