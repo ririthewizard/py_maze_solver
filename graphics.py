@@ -43,3 +43,13 @@ class Line:
 
     def draw(self, canvas: Canvas, fill_color):
         canvas.create_line(self.point_a.x, self.point_a.y, self.point_b.x, self.point_b.y, fill=fill_color, width=2)
+    
+
+class Cell:
+    def __init__(self, point_a: Point, point_b: Point, window, left_wall=True, top_wall=True, right_wall=True, bottom_wall=True):
+        self.point_a = point_a
+        self.point_b = point_b
+        self.left_wall, self.top_wall, self.right_wall, self.bottom_wall = left_wall, top_wall, right_wall, bottom_wall
+
+    def draw(self, top_left_coord, bottom_right_coord, fill_color="black"):
+        self.window.draw_line(self.canvas, top_left_coord, bottom_right_coord, fill_color)
