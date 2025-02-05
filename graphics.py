@@ -59,23 +59,39 @@ class Cell:
         #self.left_wall, self.top_wall, self.right_wall, self.bottom_wall = left_wall, top_wall, right_wall, bottom_wall
 
     def draw_cell(self, fill_color="black"):
-        if self.walls["left_wall"]:
-            point_a = Point(self.top_left_coord.x, self.top_left_coord.y)
-            point_b = Point(self.top_left_coord.x, self.bottom_right_coord.y)
-            line = Line(point_a, point_b)
-            self.window.draw_line(line, fill_color)
-        if self.walls["top_wall"]:
-            point_a = Point(self.top_left_coord.x, self.top_left_coord.y)
-            point_b = Point(self.bottom_right_coord.x, self.top_left_coord.y)
-            line = Line(point_a, point_b)
-            self.window.draw_line(line, fill_color)
-        if self.walls["right_wall"]:
-            point_a = Point(self.bottom_right_coord.x, self.top_left_coord.y)
-            point_b = Point(self.bottom_right_coord.x, self.bottom_right_coord.y)
-            line = Line(point_a, point_b)
-            self.window.draw_line(line, fill_color)
-        if self.walls["bottom_wall"]:
-            point_a = Point(self.bottom_right_coord.x, self.bottom_right_coord.y)
-            point_b = Point(self.top_left_coord.x, self.bottom_right_coord.y)
-            line = Line(point_a, point_b)
-            self.window.draw_line(line, fill_color)
+        wall_coords = {
+            "left_wall": (self.top_left_coord.x, self.top_left_coord.y,
+                        self.top_left_coord.x, self.bottom_right_coord.y),
+            "top_wall": (self.top_left_coord.x, self.top_left_coord.y,
+                        self.bottom_right_coord.x, self.top_left_coord.y),
+            "right_wall": (self.bottom_right_coord.x, self.top_left_coord.y,
+                        self.bottom_right_coord.x, self.bottom_right_coord.y),
+            "bottom_wall": (self.bottom_right_coord.x, self.bottom_right_coord.y,
+                        self.top_left_coord.x, self.bottom_right_coord.y)
+        }
+
+        for wall_type, coords in wall_coords.items():
+            if self.walls[wall_type]:
+                line = Line(Point(coords[0], coords[1]), Point(coords[2], coords[3]))
+                self.window.draw_line(line, "black")
+        
+#        if self.walls["left_wall"]:
+#            point_a = Point(self.top_left_coord.x, self.top_left_coord.y)
+#            point_b = Point(self.top_left_coord.x, self.bottom_right_coord.y)
+#            line = Line(point_a, point_b)
+#            self.window.draw_line(line, fill_color)
+#        if self.walls["top_wall"]:
+#            point_a = Point(self.top_left_coord.x, self.top_left_coord.y)
+#            point_b = Point(self.bottom_right_coord.x, self.top_left_coord.y)
+#            line = Line(point_a, point_b)
+#            self.window.draw_line(line, fill_color)
+#        if self.walls["right_wall"]:
+#            point_a = Point(self.bottom_right_coord.x, self.top_left_coord.y)
+#            point_b = Point(self.bottom_right_coord.x, self.bottom_right_coord.y)
+#            line = Line(point_a, point_b)
+#            self.window.draw_line(line, fill_color)
+#        if self.walls["bottom_wall"]:
+#            point_a = Point(self.bottom_right_coord.x, self.bottom_right_coord.y)
+#            point_b = Point(self.top_left_coord.x, self.bottom_right_coord.y)
+#            line = Line(point_a, point_b)
+#            self.window.draw_line(line, fill_color)
