@@ -49,14 +49,12 @@ class Cell:
     def __init__(self, window, top_left_coord: Point, bottom_right_coord: Point):
         self.top_left_coord = top_left_coord
         self.bottom_right_coord = bottom_right_coord
-        #TODO: Add top right and bottom left coords to make the draw_cell func easier
         self.window = window
         self.walls = { 
                 "left_wall": True,
                 "top_wall": True,
                 "right_wall": True,
                 "bottom_wall": True}
-        #self.left_wall, self.top_wall, self.right_wall, self.bottom_wall = left_wall, top_wall, right_wall, bottom_wall
 
     def draw_cell(self, fill_color="black"):
         wall_coords = {
@@ -74,24 +72,3 @@ class Cell:
             if self.walls[wall_type]:
                 line = Line(Point(coords[0], coords[1]), Point(coords[2], coords[3]))
                 self.window.draw_line(line, "black")
-        
-#        if self.walls["left_wall"]:
-#            point_a = Point(self.top_left_coord.x, self.top_left_coord.y)
-#            point_b = Point(self.top_left_coord.x, self.bottom_right_coord.y)
-#            line = Line(point_a, point_b)
-#            self.window.draw_line(line, fill_color)
-#        if self.walls["top_wall"]:
-#            point_a = Point(self.top_left_coord.x, self.top_left_coord.y)
-#            point_b = Point(self.bottom_right_coord.x, self.top_left_coord.y)
-#            line = Line(point_a, point_b)
-#            self.window.draw_line(line, fill_color)
-#        if self.walls["right_wall"]:
-#            point_a = Point(self.bottom_right_coord.x, self.top_left_coord.y)
-#            point_b = Point(self.bottom_right_coord.x, self.bottom_right_coord.y)
-#            line = Line(point_a, point_b)
-#            self.window.draw_line(line, fill_color)
-#        if self.walls["bottom_wall"]:
-#            point_a = Point(self.bottom_right_coord.x, self.bottom_right_coord.y)
-#            point_b = Point(self.top_left_coord.x, self.bottom_right_coord.y)
-#            line = Line(point_a, point_b)
-#            self.window.draw_line(line, fill_color)
