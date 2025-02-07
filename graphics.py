@@ -82,3 +82,6 @@ class Cell:
         line_between_centers = Line(Point(center_one[0], center_one[1]), Point(center_two[0], center_two[1]))
 
         self.window.draw_line(line_between_centers, fill_color="red" if undo == False else "gray")
+    
+    def __repr__(self):
+        return f"Cell(top_left={self.top_left_coord.x, self.top_left_coord.y}, bottom_right={self.bottom_right_coord.x, self.bottom_right_coord.y})"
