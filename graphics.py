@@ -56,7 +56,7 @@ class Cell:
                 "right_wall": True,
                 "bottom_wall": True}
 
-    def draw_cell(self, fill_color="black"):
+    def __draw_cell(self, fill_color="black"):
         wall_coords = {
             "left_wall": (self.top_left_coord.x, self.top_left_coord.y,
                         self.top_left_coord.x, self.bottom_right_coord.y),
@@ -73,10 +73,10 @@ class Cell:
                 line = Line(Point(coords[0], coords[1]), Point(coords[2], coords[3]))
                 self.window.draw_line(line, "black")
     
-    def find_center(self):
+    def __find_center(self):
         return [int(((self.top_left_coord.x + self.bottom_right_coord.x) / 2)), int(((self.top_left_coord.y + self.bottom_right_coord.y) / 2))]
 
-    def draw_move(self, to_cell, undo=False):
+    def __draw_move(self, to_cell, undo=False):
         center_one = self.find_center()
         center_two = to_cell.find_center()
         line_between_centers = Line(Point(center_one[0], center_one[1]), Point(center_two[0], center_two[1]))
