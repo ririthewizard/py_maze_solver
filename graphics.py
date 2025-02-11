@@ -48,7 +48,7 @@ class Line:
     
 
 class Cell:
-    def __init__(self, window, top_left_coord: Point, bottom_right_coord: Point):
+    def __init__(self, top_left_coord: Point, bottom_right_coord: Point, window = None):
         self.top_left_coord = top_left_coord
         self.bottom_right_coord = bottom_right_coord
         self.window = window
