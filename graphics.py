@@ -3,13 +3,15 @@ from tkinter import ttk
 
 class Window:
     def __init__(self, width, height):
+        self.width = width
+        self.height = height
         self.root = Tk()
         self.root.title("Maze Solver")
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(0, weight=1)
         self.root.protocol("WM_DELETE_WINDOW", self.close)
 
-        self.canvas = Canvas(self.root, bg="white", width=width, height=height)
+        self.canvas = Canvas(self.root, bg="white", width = self.width, height = self.height)
         self.canvas.grid(column=0, row=0, sticky=(N, W, E, S))
 
         self.running = False
@@ -46,7 +48,7 @@ class Line:
     
 
 class Cell:
-    def __init__(self, window, top_left_coord: Point, bottom_right_coord: Point):
+    def __init__(self, top_left_coord: Point, bottom_right_coord: Point, window=None):
         self.top_left_coord = top_left_coord
         self.bottom_right_coord = bottom_right_coord
         self.window = window
@@ -56,7 +58,7 @@ class Cell:
                 "right_wall": True,
                 "bottom_wall": True}
 
-    def draw_cell(self, fill_color="black"):
+    def __draw_cell(self, fill_color="black"):
         wall_coords = {
             "left_wall": (self.top_left_coord.x, self.top_left_coord.y,
                         self.top_left_coord.x, self.bottom_right_coord.y),
@@ -68,17 +70,25 @@ class Cell:
                         self.top_left_coord.x, self.bottom_right_coord.y)
         }
 
-        for wall_type, coords in wall_coords.items():
-            if self.walls[wall_type]:
+        if self.window:
+            for wall_type, coords in wall_coords.items():
+            #if self.walls[f"{wall_type}"]:
                 line = Line(Point(coords[0], coords[1]), Point(coords[2], coords[3]))
-                self.window.draw_line(line, "black")
+                if self.walls[wall_type] == True:
+                    self.window.draw_line(line, "black")
+                elif self.walls[wall_type] == False:
+                    self.window.draw_line(line, "white")
     
-    def find_center(self):
+    def __find_center(self):
         return [int(((self.top_left_coord.x + self.bottom_right_coord.x) / 2)), int(((self.top_left_coord.y + self.bottom_right_coord.y) / 2))]
 
-    def draw_move(self, to_cell, undo=False):
+    def __draw_move(self, to_cell, undo=False):
         center_one = self.find_center()
         center_two = to_cell.find_center()
         line_between_centers = Line(Point(center_one[0], center_one[1]), Point(center_two[0], center_two[1]))
 
-        self.window.draw_line(line_between_centers, fill_color="red" if undo == False else "gray")
+        if self.window:
+            self.window.draw_line(line_between_centers, fill_color="red" if undo == False else "gray")
+    
+    def __repr__(self):
+        return f"Cell(top_left={self.top_left_coord.x, self.top_left_coord.y}, bottom_right={self.bottom_right_coord.x, self.bottom_right_coord.y})"
