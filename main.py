@@ -10,7 +10,9 @@ def main():
     #cell_one.__draw_cell()
     maze._create_cells()
     maze._break_entrance_and_exit()
-  
+    print(maze.cells[0][0].walls["top_wall"])
+    print(maze.cells[maze.num_rows - 1][maze.num_cols - 1].walls["bottom_wall"])
+
     main_window.wait_for_close()
 
 main()

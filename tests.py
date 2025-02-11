@@ -22,7 +22,7 @@ class Tests(unittest.TestCase):
         m1._create_cells()
         m1._break_entrance_and_exit()
         self.assertEqual(m1.cells[0][0].walls["top_wall"], False)
-        self.assertEqual(m1.cells[num_cols][num_rows].walls["bottom_wall"], False)
+        self.assertEqual(m1.cells[num_cols - 1][num_rows - 1].walls["bottom_wall"], False)
 
 
 if __name__ == "__main__":
