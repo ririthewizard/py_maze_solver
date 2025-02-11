@@ -44,4 +44,4 @@ class Maze:
         self.cells[0][0].walls["top_wall"] = False
         self._draw_cell(0, 0)
         self.cells[self.num_cols][self.num_rows].walls["bottom_wall"] = False
-        self._draw_cell(self.cells[self.num_cols], self.cells[self.num_rows])
+        self._draw_cell(self.num_cols, self.num_rows)

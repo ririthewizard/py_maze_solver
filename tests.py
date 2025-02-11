@@ -19,6 +19,7 @@ class Tests(unittest.TestCase):
         num_rows = 10
         num_cols = 12
         m1 = Maze(0, 0, num_rows, num_cols, 10, 10,)
+        m1._create_cells()
         m1._break_entrance_and_exit()
         self.assertEqual(m1.cells[0][0].walls["top_wall"], False)
         self.assertEqual(m1.cells[num_cols][num_rows].walls["bottom_wall"], False)
