@@ -32,10 +32,14 @@ class Maze:
         temp_cell = Cell(Point(cell_position.top_left_coord.x, cell_position.top_left_coord.y), 
                         Point(cell_position.bottom_right_coord.x, cell_position.bottom_right_coord.y))
         temp_cell._Cell__draw_cell()
-        #current_cell = self.cells[i][j]
-        #current_cell._Cell__draw
         self._animate()
     
     def _animate(self):
         self.win.redraw()
         time.sleep(0.05)
+
+    def _break_entrance_and_exit(self):
+        self.cells[0][0].walls["top_wall"] = False
+        self._draw_cell(0, 0)
+        self.cells[self.num_cols][self.num_rows].walls["bottom_wall"] = False
+        self._draw_cell(self.cells[self.num_cols], self.cells[self.num_rows])
