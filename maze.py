@@ -12,10 +12,13 @@ class Maze:
             num_cols,
             cell_size_x,
             cell_size_y,
-            win=None
+            win=None,
+            seed=None,
     ):
-        self.x1, self.y1, self.num_rows, self.num_cols, self.cell_size_x, self.cell_size_y, self.win = x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win
+        self.x1, self.y1, self.num_rows, self.num_cols, self.cell_size_x, self.cell_size_y, self.win, self.seed = x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win, self.seed
         self._create_cells()
+        if seed:
+            random.seed(seed)
     
     def _create_cells(self):
         self.cells = []

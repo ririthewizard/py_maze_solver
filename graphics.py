@@ -48,10 +48,8 @@ class Line:
     
 
 class Cell:
-    def __init__(self, top_left_coord: Point, bottom_right_coord: Point, window=None):
-        self.top_left_coord = top_left_coord
-        self.bottom_right_coord = bottom_right_coord
-        self.window = window
+    def __init__(self, top_left_coord: Point, bottom_right_coord: Point, window=None, visited=False):
+        self.top_left_coord, self.bottom_right_coord, self.window, self.visited = top_left_coord, bottom_right_coord, window, visited
         self.walls = { 
                 "left_wall": True,
                 "top_wall": True,
