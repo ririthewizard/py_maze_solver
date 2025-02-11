@@ -3,13 +3,15 @@ from tkinter import ttk
 
 class Window:
     def __init__(self, width, height):
+        self.width = width
+        self.height = height
         self.root = Tk()
         self.root.title("Maze Solver")
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(0, weight=1)
         self.root.protocol("WM_DELETE_WINDOW", self.close)
 
-        self.canvas = Canvas(self.root, bg="white", width=width, height=height)
+        self.canvas = Canvas(self.root, bg="white", width = self.width, height = self.height)
         self.canvas.grid(column=0, row=0, sticky=(N, W, E, S))
 
         self.running = False
