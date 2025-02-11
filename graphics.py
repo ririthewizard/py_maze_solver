@@ -83,7 +83,7 @@ class Cell:
         center_two = to_cell.find_center()
         line_between_centers = Line(Point(center_one[0], center_one[1]), Point(center_two[0], center_two[1]))
 
-        if self.window is not None:
+        if self.window:
             self.window.draw_line(line_between_centers, fill_color="red" if undo == False else "gray")
     
     def __repr__(self):
