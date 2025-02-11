@@ -48,7 +48,7 @@ class Line:
     
 
 class Cell:
-    def __init__(self, top_left_coord: Point, bottom_right_coord: Point, window = None):
+    def __init__(self, top_left_coord: Point, bottom_right_coord: Point, window=None):
         self.top_left_coord = top_left_coord
         self.bottom_right_coord = bottom_right_coord
         self.window = window
@@ -73,7 +73,7 @@ class Cell:
         for wall_type, coords in wall_coords.items():
             if self.walls[wall_type]:
                 line = Line(Point(coords[0], coords[1]), Point(coords[2], coords[3]))
-                self.window.draw_line(line, "black")
+                self.window.draw_line(line)
     
     def __find_center(self):
         return [int(((self.top_left_coord.x + self.bottom_right_coord.x) / 2)), int(((self.top_left_coord.y + self.bottom_right_coord.y) / 2))]
@@ -83,7 +83,8 @@ class Cell:
         center_two = to_cell.find_center()
         line_between_centers = Line(Point(center_one[0], center_one[1]), Point(center_two[0], center_two[1]))
 
-        self.window.draw_line(line_between_centers, fill_color="red" if undo == False else "gray")
+        if self.window is not None:
+            self.window.draw_line(line_between_centers, fill_color="red" if undo == False else "gray")
     
     def __repr__(self):
         return f"Cell(top_left={self.top_left_coord.x, self.top_left_coord.y}, bottom_right={self.bottom_right_coord.x, self.bottom_right_coord.y})"
