@@ -47,11 +47,13 @@ class Maze:
         self._draw_cell(self.num_cols - 1, self.num_rows - 1)
 
     def _break_walls_r(self, i, j):
-        current_cell = self.cells[i][j]
-        current_cell.visited = True
-        moves = {
-            up: [i + 1][j],
-            down: [i][j + 1],
-            left: [i - 1][j],
-            right: [i][j - 1]
-        }
+        if (i, j) >= (0, 0) and (i, j) < (self.num_cols, self.num_rows):
+            current_cell = self.cells[i][j]
+            current_cell.visited = True
+            #Need coordinates of where we are moving, 
+            #which wall needs to be broken in the current cell
+            #which wall needs to be broken in the destination cell
+            moves = []
+            while True:
+                pass
+
