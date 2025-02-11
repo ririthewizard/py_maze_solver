@@ -28,10 +28,12 @@ class Maze:
                     self._draw_cell(cols, rows)
         
     def _draw_cell(self, i, j):
-        cell_position = self.cells[i][j]
-        temp_cell = Cell(Point(cell_position.top_left_coord.x, cell_position.top_left_coord.y), 
-                        Point(cell_position.bottom_right_coord.x, cell_position.bottom_right_coord.y))
-        temp_cell._Cell__draw_cell()
+        #cell_position = self.cells[i][j]
+        #emp_cell = Cell(Point(cell_position.top_left_coord.x, cell_position.top_left_coord.y), 
+        #                Point(cell_position.bottom_right_coord.x, cell_position.bottom_right_coord.y))
+        #temp_cell._Cell__draw_cell()
+        current_cell = self.cells[i][j]
+        current_cell._Cell__draw_cell()
         self._animate()
     
     def _animate(self):

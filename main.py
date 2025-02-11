@@ -9,7 +9,7 @@ def main():
     #cell_one = Cell(main_window, Point(100, 100), Point(400, 400))
     #cell_one.__draw_cell()
     maze._create_cells()
-    #maze._break_entrance_and_exit()
+    maze._break_entrance_and_exit()
   
     main_window.wait_for_close()
 

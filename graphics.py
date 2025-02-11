@@ -73,7 +73,7 @@ class Cell:
         for wall_type, coords in wall_coords.items():
             if self.walls[wall_type]:
                 line = Line(Point(coords[0], coords[1]), Point(coords[2], coords[3]))
-                self.window.draw_line(line)
+                self.window.draw_line(line, "black")
     
     def __find_center(self):
         return [int(((self.top_left_coord.x + self.bottom_right_coord.x) / 2)), int(((self.top_left_coord.y + self.bottom_right_coord.y) / 2))]
