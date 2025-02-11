@@ -45,3 +45,13 @@ class Maze:
         self._draw_cell(0, 0)
         self.cells[self.num_cols - 1][self.num_rows - 1].walls["bottom_wall"] = False
         self._draw_cell(self.num_cols - 1, self.num_rows - 1)
+
+    def _break_walls_r(self, i, j):
+        current_cell = self.cells[i][j]
+        current_cell.visited = True
+        moves = {
+            up: [i + 1][j],
+            down: [i][j + 1],
+            left: [i - 1][j],
+            right: [i][j - 1]
+        }
