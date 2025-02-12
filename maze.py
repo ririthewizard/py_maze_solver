@@ -53,7 +53,7 @@ class Maze:
             #Need coordinates of where we are moving, 
             #which wall needs to be broken in the current cell
             #which wall needs to be broken in the destination cell
-            moves = []
+            move = ((new_i, new_j), current_cell_break, dest_cell_break)
             while True:
                 pass
 
