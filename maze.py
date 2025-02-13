@@ -95,6 +95,25 @@ class Maze:
             for rows in range(self.num_rows):
                 self.cells[cols][rows].visited = False
 
+    def solve(self):
+        solved = self.solve_r(0, 0)
+        if solved == True:
+            return True
+        return False
+
+    def solve_r(self, i, j):
+        end_cell = self.cells[self.num_cols - 1][self.num_rows - 1]
+        current_cell = self.cells[i][j]
+
+        self._animate()
+        current_cell.visited = True
+
+        #for each direction check if 1) a cell exists 2) there is no wall on the current cell and dest cell and 3) dest cell hasn't been visited
+
+
+
+
+
 
 
 
