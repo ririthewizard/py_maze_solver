@@ -24,6 +24,20 @@ class Tests(unittest.TestCase):
         self.assertEqual(m1.cells[0][0].walls["top_wall"], False)
         self.assertEqual(m1.cells[num_cols - 1][num_rows - 1].walls["bottom_wall"], False)
 
+    def visited_reset_properly(self):
+        m1 = Maze(0, 0, 10, 12, 10, 10,)
+        m1._create_cells()
+        m1._break_walls_r()
+        m1._reset_cells_visited()
+        
+        count = 0
+        for cols in range(self.num_cols):
+            for rows in range(self.num_rows):
+                if self.cells[cols][rows].visited == True:
+                    count += 1
+        self.assertEqual(count, 0)
+
+
 
 if __name__ == "__main__":
     unittest.main()

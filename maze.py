@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from graphics import *
 import time
+import random
 
 class Maze:
     def __init__(
@@ -15,7 +16,7 @@ class Maze:
             win=None,
             seed=None,
             ):
-        self.x1, self.y1, self.num_rows, self.num_cols, self.cell_size_x, self.cell_size_y, self.win, self.seed = x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win, self.seed
+        self.x1, self.y1, self.num_rows, self.num_cols, self.cell_size_x, self.cell_size_y, self.win, self.seed = x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win, seed
         self._create_cells()
         if seed:
             random.seed(seed)
@@ -47,13 +48,49 @@ class Maze:
         self._draw_cell(self.num_cols - 1, self.num_rows - 1)
 
     def _break_walls_r(self, i, j):
-        if (i, j) >= (0, 0) and (i, j) < (self.num_cols, self.num_rows):
-            current_cell = self.cells[i][j]
-            current_cell.visited = True
-            #Need coordinates of where we are moving, 
-            #which wall needs to be broken in the current cell
-            #which wall needs to be broken in the destination cell
-            move = ((new_i, new_j), current_cell_break, dest_cell_break)
-            while True:
-                pass
+        self.cells[i][j].visited = True 
+        while True:
+            to_visit = []
+
+            #i = cols j = rows
+            #left
+            if (i - 1 >= 0) and self.cells[i - 1][j].visited == False:
+                to_visit.append((i - 1, j))
+            #up
+            if (j - 1 >= 0) and self.cells[i][j - 1].visited == False:
+                to_visit.append((i, j - 1))
+            #right
+            if (i < self.num_cols - 1) and self.cells[i + 1][j].visited == False:
+                to_visit.append((i + 1, j))
+            #down
+            if (j < self.num_rows - 1) and self.cells[i][j + 1].visited == False:
+                to_visit.append((i, j + 1))
+            else:
+                self.cells[i][j]._Cell__draw_cell() 
+                return
+
+            dest_coords = to_visit[random.randint(0, len(to_visit) - 1)]
+            
+            if dest_coords[0] < i:
+                self.cells[i][j].walls["left_wall"] = False
+                self.cells[i - 1][j].walls["right_wall"] = False
+            if dest_coords[1] < j:
+                self.cells[i][j].walls["top_wall"] = False
+                self.cells[i][j - 1].walls["bottom_wall"] = False
+            if dest_coords[0] > i:
+                self.cells[i][j].walls["right_wall"] = False
+                self.cells[i + 1][j].walls["left_wall"] = False
+            if dest_coords[1] > j:
+                self.cells[i][j].walls["bottom_wall"] = False
+                self.cells[i][j + 1].walls["top_wall"] = False
+
+            self._break_walls_r(dest_coords[0], dest_coords[1])
+
+    def _reset_cells_visited(self):
+        for cols in range(self.num_cols):
+            for rows in range(self.num_rows):
+                self.cells[cols][rows].visited = False
+
+
+
 

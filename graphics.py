@@ -45,38 +45,38 @@ class Line:
 
     def draw(self, canvas: Canvas, fill_color):
         canvas.create_line(self.point_a.x, self.point_a.y, self.point_b.x, self.point_b.y, fill=fill_color, width=2)
-    
+
 
 class Cell:
     def __init__(self, top_left_coord: Point, bottom_right_coord: Point, window=None, visited=False):
         self.top_left_coord, self.bottom_right_coord, self.window, self.visited = top_left_coord, bottom_right_coord, window, visited
         self.walls = { 
-                "left_wall": True,
-                "top_wall": True,
-                "right_wall": True,
-                "bottom_wall": True}
+                      "left_wall": True,
+                      "top_wall": True,
+                      "right_wall": True,
+                      "bottom_wall": True}
 
     def __draw_cell(self, fill_color="black"):
         wall_coords = {
-            "left_wall": (self.top_left_coord.x, self.top_left_coord.y,
-                        self.top_left_coord.x, self.bottom_right_coord.y),
-            "top_wall": (self.top_left_coord.x, self.top_left_coord.y,
-                        self.bottom_right_coord.x, self.top_left_coord.y),
-            "right_wall": (self.bottom_right_coord.x, self.top_left_coord.y,
-                        self.bottom_right_coord.x, self.bottom_right_coord.y),
-            "bottom_wall": (self.bottom_right_coord.x, self.bottom_right_coord.y,
-                        self.top_left_coord.x, self.bottom_right_coord.y)
-        }
+                "left_wall": (self.top_left_coord.x, self.top_left_coord.y,
+                              self.top_left_coord.x, self.bottom_right_coord.y),
+                "top_wall": (self.top_left_coord.x, self.top_left_coord.y,
+                             self.bottom_right_coord.x, self.top_left_coord.y),
+                "right_wall": (self.bottom_right_coord.x, self.top_left_coord.y,
+                               self.bottom_right_coord.x, self.bottom_right_coord.y),
+                "bottom_wall": (self.bottom_right_coord.x, self.bottom_right_coord.y,
+                                self.top_left_coord.x, self.bottom_right_coord.y)
+                }
 
         if self.window:
             for wall_type, coords in wall_coords.items():
-            #if self.walls[f"{wall_type}"]:
+                #if self.walls[f"{wall_type}"]:
                 line = Line(Point(coords[0], coords[1]), Point(coords[2], coords[3]))
                 if self.walls[wall_type] == True:
                     self.window.draw_line(line, "black")
                 elif self.walls[wall_type] == False:
                     self.window.draw_line(line, "white")
-    
+
     def __find_center(self):
         return [int(((self.top_left_coord.x + self.bottom_right_coord.x) / 2)), int(((self.top_left_coord.y + self.bottom_right_coord.y) / 2))]
 
@@ -87,6 +87,6 @@ class Cell:
 
         if self.window:
             self.window.draw_line(line_between_centers, fill_color="red" if undo == False else "gray")
-    
+
     def __repr__(self):
         return f"Cell(top_left={self.top_left_coord.x, self.top_left_coord.y}, bottom_right={self.bottom_right_coord.x, self.bottom_right_coord.y})"
