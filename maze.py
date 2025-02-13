@@ -16,10 +16,13 @@ class Maze:
             win=None,
             seed=None,
             ):
-        self.x1, self.y1, self.num_rows, self.num_cols, self.cell_size_x, self.cell_size_y, self.win, self.seed = x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win, seed
-        self._create_cells()
+        self.x1, self.y1, self.num_rows, self.num_cols, self.cell_size_x, self.cell_size_y, self.win, = x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win 
         if seed:
             random.seed(seed)
+
+        self._create_cells()
+        self._break_entrance_and_exit()
+        self._break_walls_r(0, 0)
 
     def _create_cells(self):
         self.cells = []
@@ -65,8 +68,9 @@ class Maze:
             #down
             if (j < self.num_rows - 1) and self.cells[i][j + 1].visited == False:
                 to_visit.append((i, j + 1))
-            else:
-                self.cells[i][j]._Cell__draw_cell() 
+
+            if len(to_visit) == 0:
+                self._draw_cell(i, j)
                 return
 
             dest_coords = to_visit[random.randint(0, len(to_visit) - 1)]
