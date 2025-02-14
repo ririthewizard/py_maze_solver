@@ -74,7 +74,7 @@ class Maze:
                 return
 
             dest_coords = to_visit[random.randint(0, len(to_visit) - 1)]
-            
+
             if dest_coords[0] < i:
                 self.cells[i][j].walls["left_wall"] = False
                 self.cells[i - 1][j].walls["right_wall"] = False
