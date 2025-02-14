@@ -109,6 +109,8 @@ class Maze:
         current_cell.visited = True
 
         #for each direction check if 1) a cell exists 2) there is no wall on the current cell and dest cell and 3) dest cell hasn't been visited
+        if self.cells[i - 1][j] and (current_cell.walls[""left_wall"] == False and self.cells[i - 1][j] == False) and self.cell[i - 1][j].visited == False:
+
 
 
 
