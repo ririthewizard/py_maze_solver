@@ -81,8 +81,8 @@ class Cell:
         return [int(((self.top_left_coord.x + self.bottom_right_coord.x) / 2)), int(((self.top_left_coord.y + self.bottom_right_coord.y) / 2))]
 
     def __draw_move(self, to_cell, undo=False):
-        center_one = self.find_center()
-        center_two = to_cell.find_center()
+        center_one = self.__find_center()
+        center_two = to_cell.__find_center()
         line_between_centers = Line(Point(center_one[0], center_one[1]), Point(center_two[0], center_two[1]))
 
         if self.window:
