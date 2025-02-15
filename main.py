@@ -6,6 +6,7 @@ def main():
     width = 800
     main_window = Window(width, height)
     maze = Maze(10, 10, 10, 10, 20, 20, main_window)
+    maze.solve()
 
     main_window.wait_for_close()
 
