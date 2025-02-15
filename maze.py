@@ -97,9 +97,7 @@ class Maze:
 
     def solve(self):
         solved = self.solve_r(0, 0)
-        if solved == True:
-            return True
-        return False
+        if solved return True else return False
 
     def solve_r(self, i, j):
         end_cell = self.cells[self.num_cols - 1][self.num_rows - 1]
@@ -111,8 +109,21 @@ class Maze:
         #for each direction check if 1) a cell exists 2) there is no wall on the current cell and dest cell and 3) dest cell hasn't been visited
         if self.cells[i - 1][j] and (current_cell.walls["left_wall"] == False and self.cells[i - 1][j].walls["right_wall"] == False) and self.cells[i - 1][j].visited == False:
             current_cell._Cell__draw_move(self.cells[i - 1][j])
+            if self.solve_r(i - 1, j):
+                return True
+            current_cell._Cell__draw_move(self.cells[i - 1][j], undo = True)
+
         if self.cells[i][j - 1] and (current_cell.walls["top_wall"] == False and self.cells[i][j - 1].walls["bottom_wall"] == False) and self.cells[i][j - 1].visited == False:
             current_cell._Cell__draw_move(self.cells[i][j - 1])
+            if self.solve_r(i, j - 1):
+                return True
+            current_cell._Cell__draw_move(self.cells[i][j - 1], undo = True)
+
+        if self.cells[i + 1][j] and (current_cell.walls["right_wall"] == False and self.cells[i + 1][j].walls["left_wall"] == False) and self.cells[i + 1][j].visited == False:
+            current_cell._Cell__draw_move(self.cells[i + 1][j])
+            if self.solve_r(i + 1, j):
+                return True
+            current_cell._Cell__draw_move(self.cells[i + 1][j], undo = True)
 
 
 
