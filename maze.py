@@ -93,8 +93,8 @@ class Maze:
 
     def _reset_cells_visited(self):
         for cols in range(self.num_cols):
-            for cell in cols:
-                cell.visited = False
+            for rows in range(self.num_rows):
+                self.cells[rows][cols].visited = False
 
     
 
@@ -107,14 +107,11 @@ class Maze:
 
 
         if current_cell == end_cell:
-            print("In the end, it doesn't even matter")
             return True
         
-        print("Hello from before recursion")
 
         #for each direction check if 1) a cell exists 2) there is no wall on the current cell and dest cell and 3) dest cell hasn't been visited
         if i > 0 and not current_cell.walls["left_wall"] and not self.cells[i - 1][j].visited:
-            print("Hello from left move")
             current_cell._Cell__draw_move(self.cells[i - 1][j])
             if self._solve_r(i - 1, j):
                 return True
@@ -122,7 +119,6 @@ class Maze:
                 current_cell._Cell__draw_move(self.cells[i - 1][j], undo = True)
 
         if j > 0 and not current_cell.walls["top_wall"] and not self.cells[i][j - 1].visited:
-            print("Hello from up move")
             current_cell._Cell__draw_move(self.cells[i][j - 1])
             if self._solve_r(i, j - 1):
                 return True
@@ -130,7 +126,6 @@ class Maze:
                 current_cell._Cell__draw_move(self.cells[i][j - 1], undo = True)
 
         if i < self.num_cols - 1 and not current_cell.walls["right_wall"] and not self.cells[i + 1][j].visited:
-            print("Hello from right move")
             current_cell._Cell__draw_move(self.cells[i + 1][j])
             if self._solve_r(i + 1, j):
                 return True
@@ -138,17 +133,14 @@ class Maze:
                 current_cell._Cell__draw_move(self.cells[i + 1][j], undo = True)
 
         if j < self.num_rows - 1 and not current_cell.walls["bottom_wall"] and not self.cells[i][j + 1].visited:
-            print("Hello from down move")
             current_cell._Cell__draw_move(self.cells[i][j + 1])
             if self._solve_r(i, j + 1):
                 return True
             else:
                 current_cell._Cell__draw_move(self.cells[i][j + 1], undo = True)
 
-        print("Loser cell")
         return False
 
     def solve(self):
-        print("Hello from solve")
         return self._solve_r(0,0)
 
