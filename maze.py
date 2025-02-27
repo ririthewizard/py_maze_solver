@@ -98,7 +98,7 @@ class Maze:
 
     
 
-    def _solve_r(self, i, j):
+    def _solve_r_dfs(self, i, j):
         current_cell = self.cells[i][j]
         end_cell = self.cells[self.num_cols - 1][self.num_rows - 1]
 
@@ -113,34 +113,34 @@ class Maze:
         #for each direction check if 1) a cell exists 2) there is no wall on the current cell and dest cell and 3) dest cell hasn't been visited
         if i > 0 and not current_cell.walls["left_wall"] and not self.cells[i - 1][j].visited:
             current_cell._Cell__draw_move(self.cells[i - 1][j])
-            if self._solve_r(i - 1, j):
+            if self._solve_r_dfs(i - 1, j):
                 return True
             else:
                 current_cell._Cell__draw_move(self.cells[i - 1][j], undo = True)
 
         if j > 0 and not current_cell.walls["top_wall"] and not self.cells[i][j - 1].visited:
             current_cell._Cell__draw_move(self.cells[i][j - 1])
-            if self._solve_r(i, j - 1):
+            if self._solve_r_dfs(i, j - 1):
                 return True
             else:
                 current_cell._Cell__draw_move(self.cells[i][j - 1], undo = True)
 
         if i < self.num_cols - 1 and not current_cell.walls["right_wall"] and not self.cells[i + 1][j].visited:
             current_cell._Cell__draw_move(self.cells[i + 1][j])
-            if self._solve_r(i + 1, j):
+            if self._solve_r_dfs(i + 1, j):
                 return True
             else:
                 current_cell._Cell__draw_move(self.cells[i + 1][j], undo = True)
 
         if j < self.num_rows - 1 and not current_cell.walls["bottom_wall"] and not self.cells[i][j + 1].visited:
             current_cell._Cell__draw_move(self.cells[i][j + 1])
-            if self._solve_r(i, j + 1):
+            if self._solve_r_dfs(i, j + 1):
                 return True
             else:
                 current_cell._Cell__draw_move(self.cells[i][j + 1], undo = True)
 
         return False
-
+        
     def solve(self):
-        return self._solve_r(0,0)
+        return self._solve_r_dfs(0,0)
 
