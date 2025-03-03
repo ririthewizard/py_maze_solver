@@ -140,6 +140,8 @@ class Maze:
                 current_cell._Cell__draw_move(self.cells[i][j + 1], undo = True)
 
         return False
+
+    def _
         
     def solve(self):
         return self._solve_r_dfs(0,0)
