@@ -22,7 +22,8 @@ class Maze:
 
         self._create_cells()
         self._break_entrance_and_exit()
-        self._break_walls_r(0, 0)
+        #self._break_walls_r(0, 0)
+        self.random_walk(10, 10)
         self._reset_cells_visited()
 
     def _create_cells(self):
@@ -44,6 +45,11 @@ class Maze:
         if self.win:
             self.win.redraw()
             time.sleep(0.03)
+
+    def _find_rand_point(self):
+        rand_x = random.randint(0, self.num_rows - 1)
+        rand_y = random.randint(0, self.num_cols - 1)
+        return (rand_x, rand_y)
 
     def _break_entrance_and_exit(self):
         self.cells[0][0].walls["top_wall"] = False
@@ -141,8 +147,45 @@ class Maze:
 
         return False
 
-    def _
-        
+    def random_walk(self, i, j,):
+        self.cells[i][j].visited = True 
+        while True:
+            to_visit = []
+
+            #i = cols j = rows
+            #left
+            if (i - 1 >= 0) and self.cells[i - 1][j].visited == False:
+                to_visit.append((i - 1, j))
+            #up
+            if (j - 1 >= 0) and self.cells[i][j - 1].visited == False:
+                to_visit.append((i, j - 1))
+            #right
+            if (i < self.num_cols - 1) and self.cells[i + 1][j].visited == False:
+                to_visit.append((i + 1, j))
+            #down
+            if (j < self.num_rows - 1) and self.cells[i][j + 1].visited == False:
+                to_visit.append((i, j + 1))
+
+            if len(to_visit) == 0:
+                self._draw_cell(i, j)
+                return
+
+            dest_coords = to_visit[random.randint(0, len(to_visit) - 1)]
+
+            if dest_coords[0] < i:
+                self.cells[i][j].walls["left_wall"] = False
+                self.cells[i - 1][j].walls["right_wall"] = False
+            if dest_coords[1] < j:
+                self.cells[i][j].walls["top_wall"] = False
+                self.cells[i][j - 1].walls["bottom_wall"] = False
+            if dest_coords[0] > i:
+                self.cells[i][j].walls["right_wall"] = False
+                self.cells[i + 1][j].walls["left_wall"] = False
+            if dest_coords[1] > j:
+                self.cells[i][j].walls["bottom_wall"] = False
+                self.cells[i][j + 1].walls["top_wall"] = False
+
+
     def solve(self):
         return self._solve_r_dfs(0,0)
 
