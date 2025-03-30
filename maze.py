@@ -96,7 +96,10 @@ class Maze:
                 self.cells[i][j].walls["bottom_wall"] = False
                 self.cells[i][j + 1].walls["top_wall"] = False
 
-            self._break_walls_r(dest_coords[0], dest_coords[1])
+            try:
+                self._break_walls_r(dest_coords[0], dest_coords[1])
+            except IndexError:
+                break
 
     def _reset_cells_visited(self):
         for cols in range(self.num_cols):
@@ -150,4 +153,15 @@ class Maze:
 
     def solve(self):
         return self._solve_r_dfs(0,0)
+
+
+
+    def _random_walk(self, i, j):
+        current_cell = self.cells[i][j]
+
+        while True:
+            pass
+
+
+
 
