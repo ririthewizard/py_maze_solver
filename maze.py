@@ -65,16 +65,16 @@ class Maze:
 
             #i = cols j = rows
             #left
-            if (i - 1 >= 0) and self.cells[i - 1][j].visited == False:
+            if self.cells[i - 1][j].visited == False:
                 to_visit.append((i - 1, j))
             #up
-            if (j - 1 >= 0) and self.cells[i][j - 1].visited == False:
+            if self.cells[i][j - 1].visited == False:
                 to_visit.append((i, j - 1))
             #right
-            if (i < self.num_cols - 1) and self.cells[i + 1][j].visited == False:
+            if self.cells[i + 1][j].visited == False:
                 to_visit.append((i + 1, j))
             #down
-            if (j < self.num_rows - 1) and self.cells[i][j + 1].visited == False:
+            if self.cells[i][j + 1].visited == False:
                 to_visit.append((i, j + 1))
 
             if len(to_visit) == 0:
