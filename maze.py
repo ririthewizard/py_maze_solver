@@ -23,15 +23,6 @@ class Maze:
         self._create_cells()
         self._break_entrance_and_exit()
         self._break_walls_r(0, 0)
-        #self.random_walk(10, 10)
-
-        #count = 0
-        #while count < 10:
-        #    point = self._find_rand_point()
-        #    if self.cells[point[0]][point[1]]:
-        #        self._break_wall(point[0], point[1])
-        #    count+=1
-
         self._reset_cells_visited()
 
     def _create_cells(self):
@@ -65,45 +56,6 @@ class Maze:
         self._draw_cell(0, 0)
         self.cells[self.num_cols - 1][self.num_rows - 1].walls["bottom_wall"] = False
         self._draw_cell(self.num_cols - 1, self.num_rows - 1)
-
-
-
-    def _break_wall(self, i, j):
-        self.cells[i][j].visited = True 
-        to_visit = []
-
-        #i = cols j = rows
-        #left
-        if (i - 1 >= 0) and self.cells[i - 1][j].visited == False:
-            to_visit.append((i - 1, j))
-        #up
-        if (j - 1 >= 0) and self.cells[i][j - 1].visited == False:
-            to_visit.append((i, j - 1))
-        #right
-        if (i < self.num_cols - 1) and self.cells[i + 1][j].visited == False:
-            to_visit.append((i + 1, j))
-        #down
-        if (j < self.num_rows - 1) and self.cells[i][j + 1].visited == False:
-            to_visit.append((i, j + 1))
-
-        if len(to_visit) == 0:
-            self._draw_cell(i, j)
-            return
-
-        dest_coords = to_visit[random.randint(0, len(to_visit) - 1)]
-
-        if dest_coords[0] < i:
-            self.cells[i][j].walls["left_wall"] = False
-            self.cells[i - 1][j].walls["right_wall"] = False
-        if dest_coords[1] < j:
-            self.cells[i][j].walls["top_wall"] = False
-            self.cells[i][j - 1].walls["bottom_wall"] = False
-        if dest_coords[0] > i:
-            self.cells[i][j].walls["right_wall"] = False
-            self.cells[i + 1][j].walls["left_wall"] = False
-        if dest_coords[1] > j:
-            self.cells[i][j].walls["bottom_wall"] = False
-            self.cells[i][j + 1].walls["top_wall"] = False
 
 
     def _break_walls_r(self, i, j):
@@ -195,45 +147,6 @@ class Maze:
                 current_cell._Cell__draw_move(self.cells[i][j + 1], undo = True)
 
         return False
-
-    def random_walk(self, i, j,):
-        self.cells[i][j].visited = True 
-        while True:
-            to_visit = []
-
-            #i = cols j = rows
-            #left
-            if (i - 1 >= 0) and self.cells[i - 1][j].visited == False:
-                to_visit.append((i - 1, j))
-            #up
-            if (j - 1 >= 0) and self.cells[i][j - 1].visited == False:
-                to_visit.append((i, j - 1))
-            #right
-            if (i < self.num_cols - 1) and self.cells[i + 1][j].visited == False:
-                to_visit.append((i + 1, j))
-            #down
-            if (j < self.num_rows - 1) and self.cells[i][j + 1].visited == False:
-                to_visit.append((i, j + 1))
-
-            if len(to_visit) == 0:
-                self._draw_cell(i, j)
-                return
-
-            dest_coords = to_visit[random.randint(0, len(to_visit) - 1)]
-
-            if dest_coords[0] < i:
-                self.cells[i][j].walls["left_wall"] = False
-                self.cells[i - 1][j].walls["right_wall"] = False
-            if dest_coords[1] < j:
-                self.cells[i][j].walls["top_wall"] = False
-                self.cells[i][j - 1].walls["bottom_wall"] = False
-            if dest_coords[0] > i:
-                self.cells[i][j].walls["right_wall"] = False
-                self.cells[i + 1][j].walls["left_wall"] = False
-            if dest_coords[1] > j:
-                self.cells[i][j].walls["bottom_wall"] = False
-                self.cells[i][j + 1].walls["top_wall"] = False
-
 
     def solve(self):
         return self._solve_r_dfs(0,0)
